@@ -45,4 +45,12 @@ extension AppDelegate: SessionDelegate {
         alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
         navigationController.presentViewController(alert, animated: true, completion: nil)
     }
+    
+    func sessionDidStartRequest(session: Session) {
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+    }
+    
+    func sessionDidFinishRequest(session: Session) {
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+    }
 }
