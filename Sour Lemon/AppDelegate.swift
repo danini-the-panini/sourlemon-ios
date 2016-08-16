@@ -9,6 +9,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var session: Session!
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        UIApplication.sharedApplication().statusBarStyle = .LightContent
+        
+        navigationController.navigationBar.barStyle = .BlackTranslucent
+        navigationController.navigationBar.barTintColor = UIColor(colorLiteralRed: 0.4, green: 0.62, blue: 0.22, alpha: 1.0)
+        navigationController.navigationBar.translucent = false
+        navigationController.navigationBar.tintColor = UIColor.whiteColor()
+        let shadow = NSShadow()
+        shadow.shadowColor = UIColor.blackColor()
+        shadow.shadowOffset = CGSizeMake(0, -1)
+        navigationController.navigationBar.titleTextAttributes = [
+            NSShadowAttributeName: shadow
+        ]
+        
         window?.rootViewController = navigationController
         startApplication()
         return true
@@ -23,7 +36,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func visit(URL: NSURL) {
-        let visitableViewController = VisitableViewController(URL: URL)
+        let visitableViewController = LemonViewController(URL: URL)
+        visitableViewController.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
         navigationController.pushViewController(visitableViewController, animated: true)
         session.visit(visitableViewController)
     }
@@ -32,6 +46,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let version = NSBundle.mainBundle().infoDictionary?["CFBundleShortVersionString"] as? String
         
         return version!
+    }
+    
+    func popToRoot(sender:UIBarButtonItem){
+        self.navigationController.popToRootViewControllerAnimated(true)
     }
 }
 
