@@ -14,6 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         UIApplication.sharedApplication().statusBarStyle = .LightContent
         
+        navigationController.navigationItem.title = "Sour {>.<} Lemom"
         navigationController.navigationBar.barStyle = .BlackTranslucent
         navigationController.navigationBar.barTintColor = UIColor(colorLiteralRed: 0.4, green: 0.62, blue: 0.22, alpha: 1.0)
         navigationController.navigationBar.translucent = false
