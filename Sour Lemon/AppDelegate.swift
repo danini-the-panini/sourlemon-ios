@@ -1,12 +1,15 @@
 import UIKit
 import WebKit
 import Turbolinks
+import SlideMenuControllerSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var navigationController = UINavigationController()
     var session: Session!
+    
+    static let BASE_URL = "http://localhost:3000"
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         UIApplication.sharedApplication().statusBarStyle = .LightContent
@@ -22,7 +25,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             NSShadowAttributeName: shadow
         ]
         
-        window?.rootViewController = navigationController
+        let storyboard = UIStoryboard(name:"Main", bundle:nil)
+        let menuViewController = storyboard.instantiateViewControllerWithIdentifier("MenuViewController")
+        
+        SlideMenuOptions.rightViewWidth = 200
+        SlideMenuOptions.contentViewScale = 1.0
+        
+        let slideMenuController = SlideMenuController(mainViewController: navigationController, rightMenuViewController: menuViewController)
+        self.window?.rootViewController = slideMenuController
+        self.window?.makeKeyAndVisible()
+        
         startApplication()
         return true
     }
@@ -32,12 +44,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         configuration.applicationNameForUserAgent = "SourLemon/\(self.getAppVersion())";
         session = Session(webViewConfiguration: configuration)
         session.delegate = self
-        visit(NSURL(string: "http://localhost:3000")!)
+        visit(NSURL(string: AppDelegate.BASE_URL)!)
     }
     
     func visit(URL: NSURL) {
         let visitableViewController = LemonViewController(URL: URL)
-        visitableViewController.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
         navigationController.pushViewController(visitableViewController, animated: true)
         session.visit(visitableViewController)
     }
@@ -47,14 +58,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return version!
     }
-    
-    func popToRoot(sender:UIBarButtonItem){
-        self.navigationController.popToRootViewControllerAnimated(true)
-    }
 }
 
 extension AppDelegate: SessionDelegate {
     func session(session: Session, didProposeVisitToURL URL: NSURL, withAction action: Action) {
+        print(URL.description)
         visit(URL)
     }
     

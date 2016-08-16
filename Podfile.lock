@@ -1,7 +1,9 @@
 PODS:
+  - SlideMenuControllerSwift (2.2.1)
   - Turbolinks (1.0.2)
 
 DEPENDENCIES:
+  - SlideMenuControllerSwift
   - Turbolinks (from `https://github.com/turbolinks/turbolinks-ios.git`)
 
 EXTERNAL SOURCES:
@@ -14,8 +16,9 @@ CHECKOUT OPTIONS:
     :git: https://github.com/turbolinks/turbolinks-ios.git
 
 SPEC CHECKSUMS:
+  SlideMenuControllerSwift: 95b28059fba1f3c6f7ecbe0ea189858daa48e594
   Turbolinks: d8209bab43803adae8c06d434368e16479023407
 
-PODFILE CHECKSUM: 936791219291b6231c9fbf740bdd38c90c4ddb57
+PODFILE CHECKSUM: 0a2c11cf92a80ae3be03fb7379cc11094ff28cb3
 
 COCOAPODS: 1.0.0.beta.6

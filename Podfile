@@ -2,6 +2,7 @@ platform :ios, '8.0'
 use_frameworks!
 
 pod 'Turbolinks', :git => 'https://github.com/turbolinks/turbolinks-ios.git'
+pod 'SlideMenuControllerSwift'
 
 target 'Sour Lemon' do
 
